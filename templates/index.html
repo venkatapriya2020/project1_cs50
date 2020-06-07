@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+{% block content %}
+<a class="flex-sm-fill text-sm-center nav-link shadow font-weight-bolder active" style="background: #f2f2f2; color:#8c8c8c;" href="{{'/'}}">Home</a>
+<!--<a class="flex-sm-fill text-sm-center nav-link shadow font-weight-bolder" style="background: none; color:white;" href="#">Search</a>-->
+<a class="flex-sm-fill text-sm-center nav-link active shadow font-weight-bolder" style="background: none; color:white;" href="{{'login'}}">Sign in</a>
+<a class="flex-sm-fill text-sm-center nav-link shadow font-weight-bolder" style="background: none; color:white;" href="{{'registration'}}">New User?</a>
+{% endblock %}
+{% block body %}
+  <div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6">
+          <img src="static\img\homeImage.jpg" class="img-thumbnail" alt="Responsive image" style="height:400px;width:500px">
+        </div>
+        <div class="col-md-6">
+          {% if message%}
+            {{message}}
+          {% else %}  
+          </br> 
+          {% endif %}      
+          <h4>Welcome Critique!!!</h4>
+          </br>
+          <p>
+          The Thalappakatti Biriyani Hotel’s roots can be traced all the way back to 1957. Founded by Mr. Nagasamy Naidu under the name Anandha Vilas Biriyani Hotel in Dindigul. He always wore a turban called THALAPA(a traditional head dress), which over the years became synonymous with his brand and cooking styles, leading him to earn the nick name “Thalappakatti Naidu” which would eventually became the name of our brand and restaurants.
+  Right from the beginning, he always emphasized on taste and ensured that the Biriyani made at his hotel was both delicious and unique. This was achieved and still is by meticulous selection of ingredients prepared from quality masala products. Biriyani was prepared using superior quality Seeraga samba rice, known as Parakkum sittu and meat obtained from top-class breeds of cattle particularly found in the famous cattle-markets of Kannivadi and Paramathi.
+</p>
+        </div>    
+      </div>
+      <div class="row">
+        <div class="col">
+      <p></br></p>
+      
+      <p class="text-center">- <em>**Terms and Conditions</em></p>
+      <p></p>
+    </div>
+      </div> 
+</div>
+     
+{% endblock %}

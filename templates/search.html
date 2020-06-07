@@ -1,0 +1,80 @@
+{% extends "layout.html" %}
+{% block head %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+{% endblock %}
+{% block content %}
+<a class="flex-fill text-sm-center nav-link shadow font-weight-bolder active" style="background: none; color:white;" href="{{'/search'}}">Search</a>
+<!--<a class="flex-xl-fill text-sm-center nav-link shadow font-weight-bolder" style="background: #f2f2f2; color:#8c8c8c;" href="#">Search</a>-->
+<a class="flex-xl-fill text-sm-center nav-link active shadow font-weight-bolder" style="background: none; color:white;" href="{{'/signout'}}">SignOut</a>
+<a class="flex-xl-fill text-sm-center nav-link shadow font-weight-bolder" style="background: none; color:white;" href="#">{{name}}</a>
+{% endblock %}
+  {% block body %}
+  <div class="container">
+  <h2>Search for your book</h2>
+  <p>Select the search option</p>
+  <form action="{{ url_for('search') }}" method="post">
+    <div class="form-check-inline">
+      <label class="form-check-label" for="radio1">
+        <input type="radio" class="form-check-input" id="radio1" name="optradio" value="author" checked>Author
+      </label>
+    </div>
+    <div class="form-check-inline">
+      <label class="form-check-label" for="radio2">
+        <input type="radio" class="form-check-input" id="radio2" name="optradio" value="title">Title
+      </label>
+    </div>
+    <div class="form-check-inline">
+      <label class="form-check-label">
+        <input type="radio" class="form-check-input" id="radio3" name="optradio" value="isbn">ISBN
+      </label>
+    </div>
+    <div class="form-check-inline">
+      <label class="form-check-label">
+        <input type="radio" class="form-check-input" id="radio2" name="optradio" value="year">Year
+      </label>
+    </div>
+    </br>
+    </br>
+    <div class="input-group col-xs-4">
+    <input type="text" class="form-control" placeholder="Search" name="searchtext">
+    <div class="input-group-btn">
+      <button class="btn btn-default" type="submit">
+        <i class="glyphicon glyphicon-search"></i>
+      </button>
+    </div>
+  </div>
+  </form>
+</div>
+<div class="container">
+  <h2>Search Result(s)...</h2>
+  <h3 class="text-danger">{{error}}</h3>
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th>TITLE</th>
+        <th>AUTHOR</th>
+        <th>ISBN</th>
+        <th>YEAR</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for book in books %}
+      <tr>
+        <td><a href="{{ url_for('bookdetails',title=book.title,author=book.author,isbn=book.isbn,year=book.year) }}">{{book.title}}</a></td>
+        <td>{{book.author}}</td>
+        <td><a href="{{url_for('api',isbn=book.isbn)}}">{{book.isbn}}</a></td>
+        <td>{{book.year}}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+    {% endblock %}
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+  </body>
+</html>

@@ -1,0 +1,95 @@
+{% extends "layout.html" %}
+{% block content %}
+<a class="flex-sm-fill text-sm-center nav-link shadow font-weight-bolder active" style="background: none; color:white;" href="{{'/search'}}">Search</a>
+<!--<a class="flex-sm-fill text-sm-center nav-link shadow font-weight-bolder" style="background:#f2f2f2; color:#8c8c8c;" href="{{url_for('fetch')}}">Search</a>-->
+<a class="flex-sm-fill text-sm-center nav-link active shadow font-weight-bolder" style="background: none; color:white;" href="{{'/signout'}}">Sign out</a>
+<a class="flex-sm-fill text-sm-center nav-link shadow font-weight-bolder" style="background: none; color:white;" href="#">{{name}}</a>
+{% endblock %}
+{% block body %}
+  <div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2">
+          </br>
+          <img src="static\img\bookcover.jpg" class="img-thumbnail" alt="Responsive image">
+        </div>
+        <div class="col-md-5">
+          <div class="container p-3 my-3">
+            <h2><u>{{title}}</u></h2>
+            
+            <p><b>AUTHOR:</b>&nbsp&nbsp&nbsp{{author}}</p>
+            <p><b>ISBN:</b>&nbsp&nbsp&nbsp{{isbn}}</p>
+            <p><b>YEAR OF PUBLICATION:</b>&nbsp&nbsp&nbsp{{year}}</p>
+            <p><b>*TOTAL REVIEWS:</b>&nbsp&nbsp&nbsp{{apidata['books'][0]['work_reviews_count']}}</p>
+            <p><b>*TOTAL RATING:</b>&nbsp&nbsp&nbsp{{apidata['books'][0]['work_ratings_count']}}</p>
+            <p><b>*AVERAGE RATING:</b>&nbsp&nbsp&nbsp{{apidata['books'][0]['average_rating']}}</p>
+            <p>* =><i> Source from GoodRead API</i></p>
+          </div>
+        </div>
+        <div class="col-md-5">
+          <div class="container">
+            <h4></br>Write Review</h4>
+            <form action="{{ url_for('updatereview') }}" method="post">
+              <label>&nbspRatings:</label>
+              <div class="form-check-inline">
+                <label class="form-check-label" for="radio1">
+                  &nbsp&nbsp<input type="radio" class="form-check-input" id="radio1" name="optradio" value="1" checked>1 Star
+                </label>
+              </div>
+              <div class="form-check-inline">
+                <label class="form-check-label" for="radio2">
+                  <input type="radio" class="form-check-input" id="radio2" name="optradio" value="2">2 Star
+                </label>
+              </div>
+              <div class="form-check-inline">
+                <label class="form-check-label" for="radio3">
+                  <input type="radio" class="form-check-input" id="radio3" name="optradio" value="3">3 Star
+                </label>
+              </div>
+              <div class="form-check-inline">
+                <label class="form-check-label" for="radio4">
+                  <input type="radio" class="form-check-input" id="radio4" name="optradio" value="4">4 Star
+                </label>
+              </div>
+              <div class="form-check-inline">
+                <label class="form-check-label" for="radio5">
+                  <input type="radio" class="form-check-input" id="radio5" name="optradio" value="5">5 Star
+                </label>
+              </div>
+              <div class="form-group">
+                <label for="exampleFormControlTextarea1">&nbspComments:</label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" name="reviewtext" rows="3" placeholder="Enter your comments.." required></textarea>
+              </div>
+              &nbsp&nbsp
+              {{reviewerror}}
+              
+              <button type="submit" class="btn btn-secondary">Submit</button>
+            </form>
+          </div>
+        </div>   
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="container">    
+          <h3>&nbspBook Reviews</h3>
+          {% if reviews %}
+          {% for review in reviews%}
+          <div class="shadow p-4 text-weight w-75">
+            <p style="line-height: 1.8">Name :<i> {{review.username}}</i><br>Rating :<i>  {{review.rating}} Star</i><br>Comment :<i>  {{review.review}}</i></p>
+          </div>
+          {% endfor %}
+          {% else %}
+          {{error}}
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <p></br></p>
+        <p class="text-center">- <em>**Terms and Conditions</em></p>
+        <p></p>
+      </div>
+    </div>  
+  </div>  
+    
+{% endblock %}

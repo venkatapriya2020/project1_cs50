@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<a class="flex-sm-fill text-sm-center nav-link shadow font-weight-bolder " style="background: none; color:white;" href="{{'/'}}">Home</a>
+<!--<a class="flex-sm-fill text-sm-center nav-link shadow font-weight-bolder" style="background: none; color:white;" href="#">Search</a>-->
+<a class="flex-sm-fill text-sm-center nav-link active shadow font-weight-bolder active" style="background:#f2f2f2; color:#8c8c8c;" href="{{'login'}}">Sign in</a>
+<a class="flex-sm-fill text-sm-center nav-link shadow font-weight-bolder" style="background: none; color:white;" href="{{'registration'}}">New User?</a>
+{% endblock %}
+{% block body %}
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-6">
+      <img src="static\img\loginImage.jpg" class="img-fluid img-thumbnail" alt="Responsive image" style="height:400px;width:500px">
+    </div> 
+      <div class="col-md-6">
+        <h2 class="text-center">Sign in</h2>
+      <!--  <p>In this example, we use <code>.was-validated</code> to indicate what's missing before submitting the form:</p>-->
+        <form  class="was-validated "  action="{{ url_for('login') }}" method="post">
+          <div class="form-group ">
+            <label for="uname">Email:</label>
+            <input type="text" class="form-control" id="uname" placeholder="Enter Email" name="uname" required>  
+          </div>
+          
+          <div class="form-group">
+            <label for="pwd">Password:</label>
+            <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd" required>      
+          </div></br>
+          <button type="submit" class="btn btn-secondary">Sign In</button>
+        </form>
+      </div>   
+
+    </div>
+    <div class="row">
+      <div class="col">
+    <p></br></p>
+    
+    <p class="text-center">- <em>**Terms and Conditions</em></p>
+    <p></p>
+  </div>
+    </div> 
+  </div> 
+
+</div>
+
+{% endblock %}
